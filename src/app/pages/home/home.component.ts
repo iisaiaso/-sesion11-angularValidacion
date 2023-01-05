@@ -7,22 +7,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 
-
-
 export class HomeComponent implements OnInit {
 
-  public formLogin!: FormGroup;
+  public formContacto!: FormGroup;
+  resultado!: string
+  resultadoF!: string
 
   constructor(private formBuilder: FormBuilder) {
 
   }
-
   ngOnInit(): void {
-    this.formLogin = this.formBuilder.group({
-      name: ['',
+    this.formContacto = this.formBuilder.group({
+      nombre: ['',
         [
           Validators.required,
-          Validators.minLength(8)
+          Validators.minLength(10)
         ]
       ],
       email: ['',
@@ -30,12 +29,19 @@ export class HomeComponent implements OnInit {
           Validators.required,
           Validators.email
         ]
+      ],
+      mensaje: ['',
+        [
+          Validators.required
+        ]
       ]
     })
   }
-
-  send(): any {
-    console.log(this.formLogin.value)
+  sendContact(): any {
+    if (this.formContacto.valid)
+      this.resultado = "Todos los datos son válidos";
+    else
+      this.resultado = "Hay datos inválidos en el formulario";
   }
 
 }
